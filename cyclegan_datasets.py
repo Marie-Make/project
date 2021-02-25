@@ -14,6 +14,6 @@ DATASET_TO_IMAGETYPE = {
 
 """The path to the output csv file."""
 PATH_TO_CSV = {
-    'WFG2FG_train': './project3/input/WFG2FG_train.csv',
+    'WFG2FG_train': './project4/input/WFG2FG_train.csv',
     
 }
