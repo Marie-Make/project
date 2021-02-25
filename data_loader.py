@@ -14,11 +14,11 @@ def _load_samples(csv_name, image_type):
     record_defaults = [tf.constant([], dtype=tf.string),
                        tf.constant([], dtype=tf.string)]
 
-    filename_i, filename_j = tf.decode_csv(
+    filename_i, filename_j = tf.io.decode_csv(
         csv_filename, record_defaults=record_defaults)
 
-    file_contents_i = tf.read_file(filename_i)
-    file_contents_j = tf.read_file(filename_j)
+    file_contents_i = tf.io.read_file(filename_i)
+    file_contents_j = tf.io.read_file(filename_j)
     if image_type == '.jpg':
         image_decoded_A = tf.image.decode_jpeg(
             file_contents_i, channels=model.IMG_CHANNELS)
@@ -61,7 +61,7 @@ def load_data(dataset_name, image_size_before_crop,
         image_i = tf.image.random_flip_left_right(image_i)
         image_j = tf.image.random_flip_left_right(image_j)
 
-    image_i = tf.random_crop(
+    image_i = tf.image.random_crop(
         image_i, [model.IMG_HEIGHT, model.IMG_WIDTH, 3])
     image_j = tf.random_crop(
         image_j, [model.IMG_HEIGHT, model.IMG_WIDTH, 3])
