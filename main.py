@@ -60,14 +60,14 @@ class CycleGAN:
         self.fake_A/self.fake_B to corresponding generator.
         This is use to calculate cyclic loss
         """
-        self.input_a = tf.placeholder(
+        self.input_a = tf.compat.v1.placeholder(
             tf.float32, [
                 1,
                 model.IMG_HEIGHT,
                 model.IMG_WIDTH,
                 model.IMG_CHANNELS
             ], name="input_A")
-        self.input_b = tf.placeholder(
+        self.input_b = tf.compat.v1.placeholder(
             tf.float32, [
                 1,
                 model.IMG_HEIGHT,
@@ -75,14 +75,14 @@ class CycleGAN:
                 model.IMG_CHANNELS
             ], name="input_B")
 
-        self.fake_pool_A = tf.placeholder(
+        self.fake_pool_A = tf.compat.v1.placeholder(
             tf.float32, [
                 None,
                 model.IMG_HEIGHT,
                 model.IMG_WIDTH,
                 model.IMG_CHANNELS
             ], name="fake_pool_A")
-        self.fake_pool_B = tf.placeholder(
+        self.fake_pool_B = tf.compat.v1.placeholder(
             tf.float32, [
                 None,
                 model.IMG_HEIGHT,
@@ -94,7 +94,7 @@ class CycleGAN:
 
         self.num_fake_inputs = 0
 
-        self.learning_rate = tf.placeholder(tf.float32, shape=[], name="lr")
+        self.learning_rate = tf.compat.v1.placeholder(tf.float32, shape=[], name="lr")
 
         inputs = {
             'images_a': self.input_a,
@@ -154,9 +154,9 @@ class CycleGAN:
             prob_fake_is_real=self.prob_fake_pool_b_is_real,
         )
 
-        optimizer = tf.train.AdamOptimizer(self.learning_rate, beta1=0.5)
+        optimizer = tf.compat.v1.train.AdamOptimizer(self.learning_rate, beta1=0.5)
 
-        self.model_vars = tf.trainable_variables()
+        self.model_vars = tf.compat.v1.trainable_variables()
 
         d_A_vars = [var for var in self.model_vars if 'd_A' in var.name]
         g_A_vars = [var for var in self.model_vars if 'g_A' in var.name]
@@ -267,7 +267,7 @@ class CycleGAN:
                 chkpt_fname = tf.train.latest_checkpoint(self._checkpoint_dir)
                 saver.restore(sess, chkpt_fname)
 
-            writer = tf.summary.FileWriter(self._output_dir)
+            writer = tf.cmpat.v1.summary.FileWriter(self._output_dir)
 
             if not os.path.exists(self._output_dir):
                 os.makedirs(self._output_dir)
