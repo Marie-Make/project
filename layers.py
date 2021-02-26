@@ -76,7 +76,7 @@ def general_deconv2d(inputconv, outshape, o_d=64, f_h=7, f_w=7, s_h=1, s_w=1,
 
         if do_relu:
             if(relufactor == 0):
-                conv = tf.nn.relu(conv, "relu")
+                conv = tf.where.relu(conv, "relu")
             else:
                 conv = lrelu(conv, relufactor, "lrelu")
 
