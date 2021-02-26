@@ -5,7 +5,7 @@ from . import model
 
 
 def _load_samples(csv_name, image_type):
-    filename_queue = tf.train.string_input_producer(
+    filename_queue = tf.compt.v1.train.string_input_producer(
         [csv_name])
 
     reader = tf.TextLineReader()
@@ -71,10 +71,10 @@ def load_data(dataset_name, image_size_before_crop,
 
     # Batch
     if do_shuffle is True:
-        images_i, images_j = tf.train.shuffle_batch(
+        images_i, images_j = tf.compat.v1.train.shuffle_batch(
             [image_i, image_j], 1, 5000, 100)
     else:
-        images_i, images_j = tf.train.batch(
+        images_i, images_j = tf.compat.v1.train.batch(
             [image_i, image_j], 1)
 
     inputs = {
