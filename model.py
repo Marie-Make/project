@@ -28,7 +28,7 @@ def get_outputs(inputs, network="tensorflow", skip=False):
     fake_pool_a = inputs['fake_pool_a']
     fake_pool_b = inputs['fake_pool_b']
 
-    with tf.compat.v1.variable_scope("Model") as scope:
+    with tf.variable_scope("Model") as scope:
 
         if network == "pytorch":
             current_discriminator = discriminator
@@ -83,7 +83,7 @@ def build_resnet_block(inputres, dim, name="resnet", padding="REFLECT"):
      CONSTANT
     :return: a single block of resnet.
     """
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         out_res = tf.pad(inputres, [[0, 0], [1, 1], [
             1, 1], [0, 0]], padding)
         out_res = layers.general_conv2d(
@@ -92,11 +92,11 @@ def build_resnet_block(inputres, dim, name="resnet", padding="REFLECT"):
         out_res = layers.general_conv2d(
             out_res, dim, 3, 3, 1, 1, 0.02, "VALID", "c2", do_relu=False)
 
-        return tf.where.relu(out_res + inputres)
+        return tf.nn.relu(out_res + inputres)
 
 
 def build_generator_resnet_9blocks_tf(inputgen, name="generator", skip=False):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         f = 7
         ks = 3
         padding = "REFLECT"
@@ -139,7 +139,7 @@ def build_generator_resnet_9blocks_tf(inputgen, name="generator", skip=False):
 
 
 def build_generator_resnet_9blocks(inputgen, name="generator", skip=False):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         f = 7
         ks = 3
         padding = "CONSTANT"
@@ -182,7 +182,7 @@ def build_generator_resnet_9blocks(inputgen, name="generator", skip=False):
 
 
 def discriminator_tf(inputdisc, name="discriminator"):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         f = 4
 
         o_c1 = layers.general_conv2d(inputdisc, ndf, f, f, 2, 2,
@@ -203,7 +203,7 @@ def discriminator_tf(inputdisc, name="discriminator"):
 
 
 def discriminator(inputdisc, name="discriminator"):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         f = 4
 
         padw = 2
@@ -239,7 +239,7 @@ def discriminator(inputdisc, name="discriminator"):
 
 
 def patch_discriminator(inputdisc, name="discriminator"):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         f = 4
 
         patch_input = tf.random_crop(inputdisc, [1, 70, 70, 3])
