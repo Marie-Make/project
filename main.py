@@ -242,7 +242,7 @@ class CycleGAN:
     def train(self):
         """Training Function."""
         # Load Dataset from the dataset folder
-        self.inputs = data_loader.load_data(
+        self.inputs = tfds.load(
             self._dataset_name, self._size_before_crop,
             True, self._do_flipping)
 
