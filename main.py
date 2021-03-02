@@ -267,7 +267,7 @@ class CycleGAN:
                 chkpt_fname = tf.train.latest_checkpoint(self._checkpoint_dir)
                 saver.restore(sess, chkpt_fname)
 
-            writer = tf.cmpat.v1.summary.FileWriter(self._output_dir)
+            writer = tf.compat.v1.summary.FileWriter(self._output_dir)
 
             if not os.path.exists(self._output_dir):
                 os.makedirs(self._output_dir)
