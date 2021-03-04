@@ -32,7 +32,7 @@ def _load_samples(csv_name, image_type):
 
     return image_decoded_A, image_decoded_B
 
-   def load_data(dataset_name, image_size_before_crop,
+def load_data(dataset_name, image_size_before_crop,
               do_shuffle=True, do_flipping=False):
     """
     :param dataset_name: The name of the dataset.
