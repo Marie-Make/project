@@ -5,7 +5,8 @@ from . import model
 
 
 def _load_samples(csv_name, image_type):
-    filename_queue = tf.data.Dataset.from_tensor_slices(string_tensor).shuffle(tf.shape(input_tensor, out_type=tf.int64)[0]).repeat(num_epochs)
+    filename_queue =  tf.train.string_input_producer(
+        [csv_name])
 
     reader = tf.data.TextLineReader()
     _, csv_filename = reader.read(filename_queue)
