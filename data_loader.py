@@ -8,7 +8,7 @@ def _load_samples(csv_name, image_type):
     filename_queue = tf.data.Dataset.from_tensor_slices(
         [csv_name])
 
-    reader = tf.TextLineReader()
+    reader = tf.data.TextLineReader()
     _, csv_filename = reader.read(filename_queue)
 
     record_defaults = [tf.constant([], dtype=tf.string),
