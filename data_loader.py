@@ -5,7 +5,7 @@ from . import model
 
 
 def _load_samples(csv_name, image_type):
-    filename_queue = tf.train.string_input_producer(
+    filename_queue = tf.data.Dataset.from_tensor_slices(
         [csv_name])
 
     reader = tf.TextLineReader()
