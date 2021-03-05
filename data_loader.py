@@ -31,8 +31,8 @@ def _load_samples(csv_name, image_type):
             file_contents_j, channels=model.IMG_CHANNELS, dtype=tf.uint8)
 
     return image_decoded_A, image_decoded_B
-
-load_data = tf.data.Dataset.from_tensor_slices(string_tensor).suffle(tf.shape(input_tensor, out_type = tf.int64)[0].repeat(num_epochs):
+def load_data(dataset_name, image_size_before_crop,
+              do_shuffle=True, do_flipping=False):
      
     """
     :param dataset_name: The name of the dataset.
